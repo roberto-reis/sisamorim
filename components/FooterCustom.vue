@@ -1,8 +1,10 @@
 <template>
-  <footer class="bg-info">
-    <div class="row">
-      <div class="col-md-12">
-        FOOTER Nuxt.js
+  <footer class="bg_footer">
+    <div class="container xxl">
+      <div class="row">
+        <div class="col-md-12">
+          Copyright © 2010-2020 - Todos os direitos reservados
+        </div>
       </div>
     </div>
   </footer>
@@ -15,5 +17,8 @@ export default {
 </script>
 
 <style>
-
+  .bg_footer {
+    background-color: #455A64;
+    color: #fff;
+  }
 </style>

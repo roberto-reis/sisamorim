@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h2>
+
+    <h2 class="tetse">
       LOGIN
     </h2>
+
   </div>
 </template>
 
