@@ -2,9 +2,11 @@
   <div>
     <!-- MENU TOPO -->
     <MenuTopo />
+    <!-- MENU LATERAL -->
+    <SideNav />
 
     <!-- CONTEUDO -->
-    <main>
+    <main class="container xxl">
       <Nuxt />
     </main>
 
