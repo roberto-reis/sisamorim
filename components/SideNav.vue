@@ -22,8 +22,10 @@
           <b-nav-item href="#">Finaceiro</b-nav-item>
 
           <b-nav-item v-b-toggle.collapse-admin href="#">
-            Admin
-            <i>[icon]</i>
+            <div class="d-flex justify-content-between">
+              <span>Admin</span>
+              <fa icon="angle-down" class="text-center" />
+            </div>
           </b-nav-item>
           <b-collapse id="collapse-admin" class="mt-1 mx-1">
             <b-card>
