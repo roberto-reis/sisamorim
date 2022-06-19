@@ -6,7 +6,7 @@
     <SideNav />
 
     <!-- CONTEUDO -->
-    <main class="container xxl">
+    <main class="container xxl vh-100">
       <Nuxt />
     </main>
 

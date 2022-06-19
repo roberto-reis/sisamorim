@@ -20,5 +20,6 @@ export default {
   .bg_footer {
     background-color: #455A64;
     color: #fff;
+    padding: 1rem 0;
   }
 </style>

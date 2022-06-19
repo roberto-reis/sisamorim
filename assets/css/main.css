@@ -1,4 +1,36 @@
+body {
+  background-color: #E6EBEC;
+}
 
 .xxl {
   max-width: 1320px;
+}
+
+.breadcrumb {
+  background-color: #fff;
+}
+.nav_breadcrumb {
+  background-color: #fff;
+  border-radius: 0px 0px 0.25rem 0.25rem;
+}
+.nav_breadcrumb_title h2 {
+  color: #444;
+}
+
+.nav_bar {
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+}
+.table-custom {
+  background-color: #fff;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+.table-custom table td {
+  padding: 0.4rem 0.75rem;
+  vertical-align: middle;
+  color: #555;
+  font-size: 14px;
 }
