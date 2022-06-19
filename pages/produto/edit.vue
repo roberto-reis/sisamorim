@@ -3,7 +3,7 @@
     <b-row>
       <b-col md="12">
         <div class="d-flex justify-content-between nav_breadcrumb px-3">
-          <h3>Adicionar Produto</h3>
+          <h3>Editar Produto</h3>
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
@@ -13,7 +13,7 @@
                 <nuxt-link to="/produto" class="breadcrumb-item">Produto</nuxt-link>
               </li>
               <li class="breadcrumb-item active">
-                <span aria-current="location">Adicionar</span>
+                <span aria-current="location">Editar</span>
               </li>
             </ol>
           </div>
@@ -28,7 +28,7 @@
           <b-form-group label="Código de Barra*:" label-for="codigo_barra" class="col-md-6">
             <b-form-input
               id="codigo_barra"
-              v-model="form.codigo_barra"
+              v-model="form.name"
               type="text"
               placeholder="Digite o Código de Barra"
               required
@@ -38,7 +38,7 @@
           <b-form-group label="Nome do Produto*:" label-for="produto" class="col-md-6">
             <b-form-input
               id="produto"
-              v-model="form.produto"
+              v-model="form.name"
               type="text"
               placeholder="Digite o Nome do Produto"
               required
@@ -66,7 +66,7 @@
           <b-form-group label="Cor do Produto:" label-for="cor_produto" class="col-md-6">
             <b-form-input
               id="cor_produto"
-              v-model="form.cor_produto"
+              v-model="form.name"
               type="text"
               placeholder="Qual a cor do produto"
               required
@@ -76,7 +76,7 @@
           <b-form-group label="Estoque:" label-for="estoque" class="col-md-6">
             <b-form-input
               id="estoque"
-              v-model="form.estoque"
+              v-model="form.name"
               type="text"
               placeholder="Qunatidade em estoque"
               required
@@ -86,7 +86,7 @@
           <b-form-group label="Descrição do Produto:" label-for="descricao_produto" class="col-md-12">
             <b-form-input
               id="descricao_produto"
-              v-model="form.descricao_produto"
+              v-model="form.name"
               type="text"
               placeholder="Qual a descrição do produto"
               required
@@ -99,16 +99,16 @@
                 <b-form-group label="Valor de custo:" label-for="valor_custo" class="col-md-4">
                   <b-form-input
                     id="valor_custo"
-                    v-model="form.valor_custo"
+                    v-model="form.name"
                     type="text"
                     placeholder="Digite o valor de custo"
                     required
                   />
                 </b-form-group>
-                <b-form-group label="Lucro %:" label-for="lucro_percentual" class="col-md-4">
+                <b-form-group label="Lucro %:" label-for="lucro" class="col-md-4">
                   <b-form-input
-                    id="lucro_percentual"
-                    v-model="form.lucro_percentual"
+                    id="lucro"
+                    v-model="form.name"
                     type="text"
                     placeholder="Digite o percentual de lucro"
                     required
@@ -117,7 +117,7 @@
                 <b-form-group label="Valor da Venda:" label-for="valor_venda" class="col-md-4">
                   <b-form-input
                     id="valor_venda"
-                    v-model="form.valor_venda"
+                    v-model="form.name"
                     type="text"
                     disabled
                     required
@@ -146,16 +146,9 @@ export default {
   data () {
     return {
       form: {
-        codigo_barra: '',
-        produto: '',
+        name: '',
         centro_custo: null,
-        unidade: null,
-        cor_produto: '',
-        estoque: '',
-        descricao_produto: '',
-        valor_custo: '',
-        lucro_percentual: '',
-        valor_venda: ''
+        unidade: null
       },
       centro_custos: [{ text: 'Selecione um centro de Custo', value: null }, 'Peças', 'Serviços', 'Outros'],
       unidades: [{ text: 'Selecione uma unidade', value: null }, 'UN', 'KG', 'LT', 'M2', 'M3']

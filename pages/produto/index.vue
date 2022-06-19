@@ -2,10 +2,8 @@
   <div>
     <b-row>
       <b-col md="12">
-        <div class="d-flex justify-content-between nav_breadcrumb px-3">
-          <div class="pt-1 nav_breadcrumb_title">
-            <h2 class="mb-0">Produto</h2>
-          </div>
+        <div class="d-flex justify-content-between align-content-center nav_breadcrumb px-3">
+          <h3>Produto</h3>
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
@@ -62,7 +60,7 @@
                 <td>5000,00</td>
                 <td>UN</td>
                 <td>
-                  <nuxt-link to="/produto/1" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
                   <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
@@ -73,7 +71,7 @@
                 <td>5000,00</td>
                 <td>UN</td>
                 <td>
-                  <nuxt-link to="/produto/1" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
                   <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
@@ -127,7 +125,4 @@ export default {
 </script>
 
 <style>
-  .select_Per_page {
-    max-width: 80px;
-  }
 </style>
