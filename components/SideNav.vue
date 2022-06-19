@@ -16,7 +16,9 @@
           <li class="nav-item">
             <nuxt-link to="/" class="nav-link">Dashboard</nuxt-link>
           </li>
-          <b-nav-item href="#">Clentes</b-nav-item>
+          <li class="nav-item">
+            <nuxt-link to="/cliente" class="nav-link">Clientes</nuxt-link>
+          </li>
           <b-nav-item href="#">Fornecedores</b-nav-item>
           <li class="nav-item">
             <nuxt-link to="/produto" class="nav-link">Produtos</nuxt-link>
