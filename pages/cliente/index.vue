@@ -132,17 +132,5 @@ export default {
 </script>
 
 <style>
-  .btn_status_cliente {
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 14px;
-    padding: 0.12rem 0.5rem;
-  }
-  .bg_status_cliente_ativo {
-    background-color: #198754;
-  }
-  .bg_status_cliente_inativo {
-    background-color: #f44336;
-  }
+
 </style>

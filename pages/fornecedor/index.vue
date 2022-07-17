@@ -2,15 +2,15 @@
   <div>
     <b-row>
       <b-col md="12">
-        <div class="d-flex justify-content-between nav_breadcrumb px-3">
-          <h3>Centro de Custo</h3>
+        <div class="d-flex justify-content-between align-content-center nav_breadcrumb px-3">
+          <h3>Fornecedor</h3>
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
                 <nuxt-link to="/" class="breadcrumb-item">Home</nuxt-link>
               </li>
               <li class="breadcrumb-item active">
-                <span aria-current="location">centro-custo</span>
+                <span aria-current="location">Fornecedor</span>
               </li>
             </ol>
           </div>
@@ -21,7 +21,8 @@
     <div class="mt-4 nav_bar">
       <b-row>
         <b-col md="7" sm="12">
-          <b-button ref="btnShow" variant="success" @click="showModalCreate()">Adicionar Centro de Custo</b-button>
+          <nuxt-link to="fornecedor/create" class="btn btn-success">Adicionar Fornecedor</nuxt-link>
+          <b-button>Exportar</b-button>
         </b-col>
 
         <b-col md="5" sm="12">
@@ -44,15 +45,37 @@
             <thead>
               <tr>
                 <th>Nome</th>
+                <th>Tipo</th>
+                <th>CPF / CNPJ</th>
+                <th>Endereço</th>
+                <th>E-mail</th>
+                <th>Status</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>José Roberto Batista dos Reis</td>
+                <td>Pessoa Fisica</td>
+                <td>000.000.000-00</td>
+                <td>Estrada Adhemar Bebiano, 3610 - Engenho da Rainha</td>
+                <td>tekinforoberto@gmail.com</td>
+                <td><button class="btn_status bg_status_ativo">Ativo</button></td>
                 <td>
-                  <b-button class="btn btn-warning btn-sm" @click="showModalEdit()"><fa icon="pen" /></b-button>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                </td>
+              </tr>
+              <tr>
+                <td>José Roberto Batista dos Reis</td>
+                <td>Pessoa Jurídica</td>
+                <td>00.000.000/0000-00</td>
+                <td>Estrada Adhemar Bebiano, 3610 - Engenho da Rainha</td>
+                <td>tekinforoberto@gmail.com</td>
+                <td><button class="btn_status bg_status_inativo">Inativo</button></td>
+                <td>
+                  <nuxt-link to="/fornecedor/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
             </tbody>
@@ -76,40 +99,12 @@
         />
       </b-col>
     </b-row>
-
-    <div>
-
-      <b-modal id="modal-centro-custo" hide-footer>
-        <template #modal-title>
-          {{ titleModal }}
-        </template>
-        <div>
-          <b-form @submit.prevent="onSubmit">
-
-            <b-form-group id="nome" label="Nome:" label-for="nome">
-              <b-form-input
-                id="nome"
-                v-model="form.nome"
-                placeholder="Digite o nome do Centro de Custo"
-                required
-              />
-            </b-form-group>
-
-            <div class="d-flex justify-content-end">
-              <b-button class="mr-2" variant="outline-danger" @click="hideModal()">Cancelar</b-button>
-              <b-button type="submit" variant="success">Salvar</b-button>
-            </div>
-          </b-form>
-        </div>
-      </b-modal>
-    </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CentroCustoIndex',
+  name: 'ProdutoPage',
   layout: 'default',
   data () {
     return {
@@ -121,51 +116,16 @@ export default {
         { value: 30, text: '30' },
         { value: 50, text: '50' },
         { value: 100, text: '100' }
-      ],
-      titleModal: 'Cadastrar de Cliente',
-      form: {
-        nome: ''
-      }
+      ]
     }
   },
   methods: {
     onSelect (value) {
       console.log(value)
-    },
-    onSubmit () {
-      console.log(this.form)
-    },
-    resetModal () {
-      this.form.nome = ''
-    },
-    hideModal () {
-      this.resetModal()
-      this.$root.$emit('bv::hide::modal', 'modal-centro-custo')
-    },
-    showModalCreate () {
-      this.titleModal = 'Cadastrar de Cliente'
-      this.$root.$emit('bv::show::modal', 'modal-centro-custo')
-    },
-    showModalEdit (id) {
-      this.titleModal = 'Editar de Cliente'
-      this.$root.$emit('bv::show::modal', 'modal-centro-custo')
     }
   }
 }
 </script>
 
 <style>
-  .btn_status_cliente {
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 14px;
-    padding: 0.12rem 0.5rem;
-  }
-  .bg_status_cliente_ativo {
-    background-color: #198754;
-  }
-  .bg_status_cliente_inativo {
-    background-color: #f44336;
-  }
 </style>
