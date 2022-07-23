@@ -7,7 +7,7 @@
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
-                <nuxt-link to="/" class="breadcrumb-item">Home</nuxt-link>
+                <nuxt-link to="/" class="breadcrumb-item">home</nuxt-link>
               </li>
               <li class="breadcrumb-item active">
                 <span aria-current="location">centro-custo</span>

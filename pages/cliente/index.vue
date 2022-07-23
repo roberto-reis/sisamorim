@@ -61,7 +61,7 @@
                 <td>Estrada Adhemar Bebiano, 3610 - Engenho da Rainha</td>
                 <td>tekinforoberto@gmail.com</td>
                 <td>
-                  <button class="btn_status_cliente bg_status_cliente_ativo">Ativo</button>
+                  <button class="btn_status bg_status_ativo">Ativo</button>
                 </td>
                 <td>
                   <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
@@ -75,7 +75,7 @@
                 <td>Estrada Adhemar Bebiano, 3610 - Engenho da Rainha</td>
                 <td>joseanetekinfor@gmail.com</td>
                 <td>
-                  <button class="btn_status_cliente bg_status_cliente_inativo">Inativo</button>
+                  <button class="btn_status bg_status_inativo">Inativo</button>
                 </td>
                 <td>
                   <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>

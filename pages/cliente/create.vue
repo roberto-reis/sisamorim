@@ -7,13 +7,13 @@
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
-                <nuxt-link to="/" class="breadcrumb-item">Home</nuxt-link>
+                <nuxt-link to="/" class="breadcrumb-item">home</nuxt-link>
               </li>
               <li class="breadcrumb-item">
-                <nuxt-link to="/cliente" class="breadcrumb-item">Cliente</nuxt-link>
+                <nuxt-link to="/cliente" class="breadcrumb-item">cliente</nuxt-link>
               </li>
               <li class="breadcrumb-item active">
-                <span aria-current="location">Adicionar</span>
+                <span aria-current="location">adicionar</span>
               </li>
             </ol>
           </div>
