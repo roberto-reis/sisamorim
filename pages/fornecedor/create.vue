@@ -294,7 +294,11 @@ export default {
         uf: '',
         observacao: '',
         banco: '',
-        tipo_conta: ''
+        tipo_conta: '',
+        agencia: '',
+        digito_agencia: '',
+        conta: '',
+        digito_conta: ''
       },
       tipo_fornecedor: [{ text: 'Selecione o tipo', value: null }, 'Pessoa Física', 'Pessoa Jurídica'],
       situacoes: [{ text: 'Selecione a situação', value: null }, 'Ativo', 'Inativo'],
