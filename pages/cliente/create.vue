@@ -221,7 +221,7 @@
 
 <script>
 export default {
-  name: 'CreateProduto',
+  name: 'CreateCliente',
   layout: 'default',
   data () {
     return {

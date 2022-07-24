@@ -269,7 +269,7 @@
 
 <script>
 export default {
-  name: 'CreateProduto',
+  name: 'EditFornecedor',
   layout: 'default',
   data () {
     return {
