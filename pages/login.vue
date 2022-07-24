@@ -1,9 +1,55 @@
 <template>
   <div>
 
-    <h2 class="tetse">
-      LOGIN
-    </h2>
+    <b-row class="mt-5 justify-content-center">
+      <b-col md="5">
+        <b-card class="section_login">
+          <div class="d-flex flex-column align-content-center justify-content-center">
+            <div class="text-center mt-2 logo_login">
+              <!-- TODO: Criar Logo -->
+              <b-img src="https://picsum.photos/1024/400/?image=41" alt="Responsive image" />
+            </div>
+            <h4 class="text-center title_login mt-4">
+              Faça login para iniciar sua sessão
+            </h4>
+          </div>
+          <b-form class="form_login mt-4" @submit="onSubmit">
+            <b-form-group
+              label="E-mail:"
+              label-for="email"
+              label-class="mb-0"
+            >
+              <b-form-input
+                id="email"
+                v-model="form.email"
+                type="email"
+                size="lg"
+                placeholder="Digite o e-mail"
+                required
+              />
+            </b-form-group>
+
+            <b-form-group
+              label="Senha:"
+              label-for="password"
+              label-class="mb-0"
+              description="Nunca compartilharemos sua senha com mais ninguém."
+            >
+              <b-form-input
+                id="password"
+                v-model="form.password"
+                type="password"
+                size="lg"
+                placeholder="Digite a senha"
+                required
+              />
+            </b-form-group>
+
+            <b-button type="submit" variant="info" size="lg">Entrar</b-button>
+          </b-form>
+        </b-card>
+      </b-col>
+    </b-row>
 
   </div>
 </template>
@@ -11,10 +57,47 @@
 <script>
 export default {
   name: 'LoginPage',
-  layout: 'auth'
+  layout: 'auth',
+  data () {
+    return {
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    onSubmit (event) {
+      event.preventDefault()
+      alert(JSON.stringify(this.form))
+    }
+  }
 }
 </script>
 
 <style>
+  .form_login label {
+    color: #555;
+    font-size: 1.2rem;
+  }
+  #email, #password {
+    border: 2px solid #17A2B8;
+  }
+
+  .title_login {
+    color: #555;
+  }
+
+  .logo_login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo_login img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+  }
 
 </style>
