@@ -2,15 +2,15 @@
   <div>
     <b-row>
       <b-col md="12">
-        <div class="d-flex justify-content-between nav_breadcrumb px-3">
-          <h3>Clientes</h3>
+        <div class="d-flex justify-content-between align-content-center nav_breadcrumb px-3">
+          <h3>Fornecedor</h3>
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
                 <nuxt-link to="/" class="breadcrumb-item">Home</nuxt-link>
               </li>
               <li class="breadcrumb-item active">
-                <span aria-current="location">Clientes</span>
+                <span aria-current="location">Fornecedor</span>
               </li>
             </ol>
           </div>
@@ -21,7 +21,7 @@
     <div class="mt-4 nav_bar">
       <b-row>
         <b-col md="7" sm="12">
-          <nuxt-link to="cliente/create" class="btn btn-success">Adicionar Cliente</nuxt-link>
+          <nuxt-link to="fornecedor/create" class="btn btn-success">Adicionar Fornecedor</nuxt-link>
           <b-button>Exportar</b-button>
         </b-col>
 
@@ -46,7 +46,7 @@
               <tr>
                 <th>Nome</th>
                 <th>Tipo</th>
-                <th>CPF/CNPJ</th>
+                <th>CPF / CNPJ</th>
                 <th>Endereço</th>
                 <th>E-mail</th>
                 <th>Status</th>
@@ -60,26 +60,22 @@
                 <td>000.000.000-00</td>
                 <td>Estrada Adhemar Bebiano, 3610 - Engenho da Rainha</td>
                 <td>tekinforoberto@gmail.com</td>
+                <td><button class="btn_status bg_status_ativo">Ativo</button></td>
                 <td>
-                  <button class="btn_status bg_status_ativo">Ativo</button>
-                </td>
-                <td>
-                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
               <tr>
-                <td>Joseane Cabral Amorim</td>
+                <td>José Roberto Batista dos Reis</td>
                 <td>Pessoa Jurídica</td>
                 <td>00.000.000/0000-00</td>
                 <td>Estrada Adhemar Bebiano, 3610 - Engenho da Rainha</td>
-                <td>joseanetekinfor@gmail.com</td>
+                <td>tekinforoberto@gmail.com</td>
+                <td><button class="btn_status bg_status_inativo">Inativo</button></td>
                 <td>
-                  <button class="btn_status bg_status_inativo">Inativo</button>
-                </td>
-                <td>
-                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/fornecedor/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
             </tbody>
@@ -132,5 +128,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -7,7 +7,7 @@
           <div>
             <ol class="breadcrumb mb-0">
               <li class="breadcrumb-item">
-                <nuxt-link to="/" class="breadcrumb-item">Home</nuxt-link>
+                <nuxt-link to="/" class="breadcrumb-item">home</nuxt-link>
               </li>
               <li class="breadcrumb-item active">
                 <span aria-current="location">centro-custo</span>
@@ -21,7 +21,7 @@
     <div class="mt-4 nav_bar">
       <b-row>
         <b-col md="7" sm="12">
-          <b-button ref="btnShow" variant="success" @click="showModalCreate()">Adicionar Cliente</b-button>
+          <b-button ref="btnShow" variant="success" @click="showModalCreate()">Adicionar Centro de Custo</b-button>
         </b-col>
 
         <b-col md="5" sm="12">
