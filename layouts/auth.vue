@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-info">
+  <div>
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mt-4">
+        <div class="col-md-12">
           <Nuxt />
         </div>
       </div>
