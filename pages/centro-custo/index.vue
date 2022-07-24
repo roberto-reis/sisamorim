@@ -109,7 +109,7 @@
 
 <script>
 export default {
-  name: 'CentroCustoIndex',
+  name: 'CentroCustoPage',
   layout: 'default',
   data () {
     return {

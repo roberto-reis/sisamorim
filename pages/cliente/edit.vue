@@ -193,7 +193,7 @@
 
 <script>
 export default {
-  name: 'CreateProduto',
+  name: 'EditCliente',
   layout: 'default',
   data () {
     return {

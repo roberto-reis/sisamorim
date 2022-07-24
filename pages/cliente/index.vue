@@ -108,7 +108,7 @@
 
 <script>
 export default {
-  name: 'ProdutoPage',
+  name: 'ClientePage',
   layout: 'default',
   data () {
     return {
