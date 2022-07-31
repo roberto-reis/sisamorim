@@ -1,7 +1,9 @@
 export default function ({ $axios, redirect, app }) {
-  const token = app.$cookiz.get('token_sisamorim')
   $axios.onRequest((config) => {
-    $axios.setToken(token, 'Bearer')
+    const token = app.$cookiz.get('_token_sisamorim')
+    if (token) {
+      $axios.setToken(token, 'Bearer')
+    }
     // console.log('Making request to ' + config.url)
   })
 

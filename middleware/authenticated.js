@@ -1,5 +1,5 @@
 export default ({ redirect, app }) => {
-  const loggedIn = app.$cookiz.get('token_sisamorim')
+  const loggedIn = app.$cookiz.get('_token_sisamorim')
 
   if (!loggedIn) {
     return redirect('/login')

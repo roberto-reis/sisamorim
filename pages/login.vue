@@ -72,9 +72,10 @@ export default {
   },
   methods: {
     async onSubmit () {
-      await this.$axios.$post('/login', this.form)
+      await this.$axios.$post('/auth/login', this.form)
         .then((response) => {
-          this.$cookiz.set('token_sisamorim', response.token.access_token, {
+          console.log(response)
+          this.$cookiz.set('_token_sisamorim', response.token.access_token, {
             path: '/',
             maxAge: response.token.expires_in
           })
