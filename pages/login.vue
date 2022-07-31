@@ -9,10 +9,13 @@
               <!-- TODO: Criar Logo -->
               <b-img src="https://picsum.photos/1024/400/?image=41" alt="Responsive image" />
             </div>
-            <h4 class="text-center title_login mt-4">
+            <h4 class="text-center title_login my-4">
               Faça login para iniciar sua sessão
             </h4>
           </div>
+          <b-alert v-if="errors" show variant="danger">
+            {{ errors }}
+          </b-alert>
           <b-form class="form_login mt-4" @submit.prevent="onSubmit">
             <b-form-group
               label="E-mail:"
@@ -63,21 +66,23 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      errors: ''
     }
   },
   methods: {
     async onSubmit () {
-      await this.$axios.post('/login', this.form)
+      await this.$axios.$post('/login', this.form)
         .then((response) => {
-          this.$cookiz.set('token_sisamorim', response.data.token.access_token, {
+          this.$cookiz.set('token_sisamorim', response.token.access_token, {
             path: '/',
-            maxAge: response.data.token.expires_in
+            maxAge: response.token.expires_in
           })
-          // this.$router.push('/')
-        })
-        .catch((error) => {
-          console.log(error)
+          this.$router.push('/')
+        }).catch((error) => {
+          if (error.response.data.success === false && error.response.data.message) {
+            this.errors = error.response.data.message
+          }
         })
     }
   }
