@@ -11,11 +11,11 @@
         <div class="ml-auto">
           <b-dropdown variant="link" toggle-class="text-decoration-none dropdown_user" no-caret right>
             <template #button-content>
-              <em>User</em>
+              <em>{{ user.first_name }}</em>
               <fa icon="circle-user" class="circle_user" />
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item href="#" @click="logout()">Sair</b-dropdown-item>
           </b-dropdown>
         </div>
       </b-navbar>
@@ -26,6 +26,34 @@
 
 <script>
 export default {
+  name: 'MenuTopo',
+  data () {
+    return {
+      user: [],
+      errors: ''
+    }
+  },
+  mounted () {
+    this.getUser()
+  },
+  methods: {
+    async getUser () {
+      await this.$axios.$get('/auth/user').then((response) => {
+        this.user = response.data
+      }).catch((error) => {
+        console.error(error)
+      })
+    },
+    logout () {
+      this.$axios.$post('/auth/logout')
+        .then((response) => {
+          this.$cookiz.remove('_token_sisamorim')
+          this.$router.push('/login')
+        }).catch((error) => {
+          console.error(error)
+        })
+    }
+  }
 }
 </script>
 

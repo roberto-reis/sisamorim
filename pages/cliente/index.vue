@@ -64,8 +64,8 @@
                   <button class="btn_status bg_status_ativo">Ativo</button>
                 </td>
                 <td>
-                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <nuxt-link to="/cliente/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/cliente/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
               <tr>
@@ -78,8 +78,8 @@
                   <button class="btn_status bg_status_inativo">Inativo</button>
                 </td>
                 <td>
-                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <nuxt-link to="/cliente/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link to="/cliente/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
             </tbody>
@@ -89,45 +89,14 @@
       </b-col>
     </b-row>
 
-    <b-row>
-      <b-col cols="6">
-        <div class="select_Per_page">
-          <b-form-select v-model="perPageSelected" :options="options" @change="onSelect(perPageSelected)" />
-        </div>
-      </b-col>
-      <b-col cols="6" class="d-flex justify-content-end">
-        <b-pagination-nav
-          v-model="currentPage"
-          :number-of-pages="20"
-          base-url="?page="
-        />
-      </b-col>
-    </b-row>
+    <Pagination />
   </div>
 </template>
 
 <script>
 export default {
   name: 'ClientePage',
-  layout: 'default',
-  data () {
-    return {
-      currentPage: 1,
-      perPageSelected: 10,
-      options: [
-        { value: 10, text: '10' },
-        { value: 20, text: '20' },
-        { value: 30, text: '30' },
-        { value: 50, text: '50' },
-        { value: 100, text: '100' }
-      ]
-    }
-  },
-  methods: {
-    onSelect (value) {
-      console.log(value)
-    }
-  }
+  layout: 'default'
 }
 </script>
 
