@@ -4,4 +4,6 @@ export default ({ redirect, app }) => {
   if (!loggedIn) {
     return redirect('/login')
   }
+
+  // TODO: verificar se o token é valido
 }
