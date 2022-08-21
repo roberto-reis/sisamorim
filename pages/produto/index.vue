@@ -53,23 +53,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2081485881108</td>
-                <td>Quadro Aro 29 Alumínio Bicicleta Mtb Cores Bike</td>
-                <td>R$ 100.0000,00</td>
-                <td>5000,00</td>
-                <td>UN</td>
-                <td>
-                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
-                </td>
-              </tr>
-              <tr>
-                <td>2081485881108</td>
-                <td>Quadro Aro 29 Alumínio Bicicleta Mtb Cores Bike</td>
-                <td>R$ 100.0000,00</td>
-                <td>5000,00</td>
-                <td>UN</td>
+              <tr v-for="produto in produtos.data" :key="produto.uuid">
+                <td>{{ produto.codigo }}</td>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.preco_custo }}</td>
+                <td>{{ produto.estoque }}</td>
+                <td>{{ produto.unidade_medida }}</td>
                 <td>
                   <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
                   <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
@@ -82,44 +71,34 @@
       </b-col>
     </b-row>
 
-    <b-row>
-      <b-col cols="6">
-        <div class="select_Per_page">
-          <b-form-select v-model="perPageSelected" :options="options" @change="onSelect(perPageSelected)" />
-        </div>
-      </b-col>
-      <b-col cols="6" class="d-flex justify-content-end">
-        <b-pagination-nav
-          v-model="currentPage"
-          :number-of-pages="20"
-          base-url="?page="
-        />
-      </b-col>
-    </b-row>
+    <div>
+      <Pagination :data="pagination" />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'ProdutoPage',
   layout: 'default',
   data () {
     return {
-      currentPage: 1,
-      perPageSelected: 10,
-      options: [
-        { value: 10, text: '10' },
-        { value: 20, text: '20' },
-        { value: 30, text: '30' },
-        { value: 50, text: '50' },
-        { value: 100, text: '100' }
-      ]
+
     }
   },
+  computed: {
+    ...mapGetters({
+      produtos: 'produto/produtos',
+      pagination: 'produto/pagination'
+    })
+  },
+  mounted () {
+    this.getProdutos({ page: 1 })
+  },
   methods: {
-    onSelect (value) {
-      console.log(value)
-    }
+    ...mapActions('produto', ['getProdutos'])
   }
 }
 </script>
