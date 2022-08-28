@@ -6,8 +6,7 @@ export const state = () => ({
 
 // getters
 export const getters = {
-  produtos: state => state.produtos,
-  pagination: state => state.pagination
+  produtos: state => state.produtos
 }
 
 // actions

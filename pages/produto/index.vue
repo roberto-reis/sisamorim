@@ -78,24 +78,25 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'ProdutoPage',
   layout: 'default',
   data () {
     return {
-
     }
   },
   computed: {
+    ...mapState({
+      pagination: state => state.produto.pagination
+    }),
     ...mapGetters({
-      produtos: 'produto/produtos',
-      pagination: 'produto/pagination'
+      produtos: 'produto/produtos'
     })
   },
   mounted () {
-    this.getProdutos({ page: 1 })
+    this.getProdutos()
   },
   methods: {
     ...mapActions('produto', ['getProdutos'])
