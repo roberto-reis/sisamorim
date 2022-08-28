@@ -8,19 +8,27 @@
     <b-col cols="6" class="d-flex justify-content-end">
       <b-pagination-nav
         v-model="currentPage"
-        :number-of-pages="20"
+        :number-of-pages="totalPagina"
         base-url="?page="
+        use-router
       />
     </b-col>
+    {{ data }}
   </b-row>
 </template>
 
 <script>
 export default {
   name: 'PadinationNav',
+  props: {
+    data: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data () {
     return {
-      currentPage: 1,
+      pages: 1,
       perPageSelected: 10,
       options: [
         { value: 10, text: '10' },
@@ -31,9 +39,23 @@ export default {
       ]
     }
   },
+  computed: {
+    currentPage: {
+      get () {
+        return this.pages
+      },
+      set (value) {
+        this.pages = value
+        this.$emit('change-page', value)
+      }
+    },
+    totalPagina () {
+      return this.data.lastPage
+    }
+  },
   methods: {
     onSelect (value) {
-      console.log(value)
+      console.log('onSelect: ', value)
     }
   }
 }

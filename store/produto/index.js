@@ -6,23 +6,20 @@ export const state = () => ({
 
 // getters
 export const getters = {
-  produtos: state => state.produtos
+  produtos: state => state.produtos,
+  pagination: state => state.pagination
 }
 
 // actions
 export const actions = {
   async getProdutos ({ commit }, params = {}) {
-    console.log(params)
     const produtos = await this.$axios.$get('/produtos', { params })
     commit('SET_PRODUTOS', produtos.data)
     commit('SET_PAGINATION', {
       total: produtos.data.total,
       perPage: produtos.data.per_page,
       lastPage: produtos.data.last_page,
-      currentPage: produtos.data.current_page,
-      from: produtos.data.from,
-      to: produtos.data.to,
-      links: produtos.data.links
+      currentPage: produtos.data.current_page
     })
   },
   async getProduto ({ commit }, uuid) {

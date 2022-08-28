@@ -72,13 +72,13 @@
     </b-row>
 
     <div>
-      <Pagination :data="pagination" />
+      <Pagination :data="pagination" @change-page="loadPage($event)" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'ProdutoPage',
@@ -88,18 +88,19 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      pagination: state => state.produto.pagination
-    }),
     ...mapGetters({
-      produtos: 'produto/produtos'
+      produtos: 'produto/produtos',
+      pagination: 'produto/pagination'
     })
   },
   mounted () {
     this.getProdutos()
   },
   methods: {
-    ...mapActions('produto', ['getProdutos'])
+    ...mapActions('produto', ['getProdutos']),
+    loadPage (page) {
+      this.getProdutos(this.$route.query)
+    }
   }
 }
 </script>
