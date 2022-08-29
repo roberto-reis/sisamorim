@@ -13,7 +13,6 @@
         use-router
       />
     </b-col>
-    {{ data }}
   </b-row>
 </template>
 
@@ -28,8 +27,7 @@ export default {
   },
   data () {
     return {
-      pages: 1,
-      perPageSelected: 10,
+      perPageSelected: this.$route.query.perPage || 10,
       options: [
         { value: 10, text: '10' },
         { value: 20, text: '20' },
@@ -42,11 +40,12 @@ export default {
   computed: {
     currentPage: {
       get () {
-        return this.pages
+        return this.$route.query.page || 1
       },
-      set (value) {
-        this.pages = value
-        this.$emit('change-page', value)
+      set (page) {
+        const parametros = { page, perPage: this.perPageSelected }
+        this.$router.push({ query: parametros })
+        this.$emit('change-pagination', parametros)
       }
     },
     totalPagina () {
@@ -55,7 +54,9 @@ export default {
   },
   methods: {
     onSelect (value) {
-      console.log('onSelect: ', value)
+      const parametros = { perPage: value, page: 1 }
+      this.$router.push({ query: parametros })
+      this.$emit('change-pagination', parametros)
     }
   }
 }

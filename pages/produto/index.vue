@@ -72,7 +72,7 @@
     </b-row>
 
     <div>
-      <Pagination :data="pagination" @change-page="loadPage($event)" />
+      <Pagination :data="pagination" @change-pagination="loadPagination($event)" />
     </div>
   </div>
 </template>
@@ -94,12 +94,12 @@ export default {
     })
   },
   mounted () {
-    this.getProdutos()
+    this.getProdutos(this.$route.query)
   },
   methods: {
     ...mapActions('produto', ['getProdutos']),
-    loadPage (page) {
-      this.getProdutos(this.$route.query)
+    loadPagination (parametros) {
+      this.getProdutos(parametros)
     }
   }
 }
