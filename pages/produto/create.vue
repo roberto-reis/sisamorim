@@ -24,73 +24,96 @@
     <b-row class="mt-4 section_custon">
       <b-col md="12">
 
-        <b-form class="row" @submit.prevent="onSubmit()">
+        <b-form class="row" @submit.prevent="saveProduto(form)">
           <b-form-group label="Código de Barra*:" label-for="codigo_barra" class="col-md-6">
             <b-form-input
               id="codigo_barra"
-              v-model="form.codigo_barra"
+              v-model="form.codigo"
+              :class="hasError('codigo') ? 'is-invalid' : ''"
               type="text"
               placeholder="Digite o Código de Barra"
               required
             />
+            <span v-if="hasError('codigo')" class="invalid-feedback">
+              {{ gerError('codigo') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Nome do Produto*:" label-for="produto" class="col-md-6">
             <b-form-input
               id="produto"
-              v-model="form.produto"
+              v-model="form.nome"
+              :class="hasError('nome') ? 'is-invalid' : ''"
               type="text"
               placeholder="Digite o Nome do Produto"
               required
             />
+            <span v-if="hasError('codigo')" class="invalid-feedback">
+              {{ gerError('nome') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Centro de Custo:" label-for="centro_custo" class="col-md-6">
-            <b-form-select
-              id="centro_custo"
-              v-model="form.centro_custo"
-              :options="centro_custos"
-              required
-            />
+            <select id="centro_custo" v-model="form.centro_custo_uuid" class="form-control custom-select" :class="hasError('centro_custo_uuid') ? 'is-invalid' : ''" required>
+              <option value="">Selecione um centro de Custo</option>
+              <option v-for="centroCusto in centroCustos" :key="centroCusto.uuid" :value="centroCusto.uuid">
+                {{ centroCusto.nome }}
+              </option>
+            </select>
+            <span v-if="hasError('centro_custo_uuid')" class="invalid-feedback">
+              {{ gerError('centro_custo_uuid') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Unidade:" label-for="unidade" class="col-md-6">
             <b-form-select
               id="unidade"
-              v-model="form.unidade"
+              v-model="form.unidade_medida"
+              :class="hasError('unidade_medida') ? 'is-invalid' : ''"
               :options="unidades"
-              required
             />
+            <span v-if="hasError('unidade_medida')" class="invalid-feedback">
+              {{ gerError('unidade_medida') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Cor do Produto:" label-for="cor_produto" class="col-md-6">
             <b-form-input
               id="cor_produto"
-              v-model="form.cor_produto"
+              v-model="form.cor"
+              :class="hasError('cor') ? 'is-invalid' : ''"
               type="text"
               placeholder="Qual a cor do produto"
-              required
             />
+            <span v-if="hasError('cor')" class="invalid-feedback">
+              {{ gerError('cor') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Estoque:" label-for="estoque" class="col-md-6">
             <b-form-input
               id="estoque"
               v-model="form.estoque"
+              :class="hasError('estoque') ? 'is-invalid' : ''"
               type="text"
               placeholder="Qunatidade em estoque"
-              required
             />
+            <span v-if="hasError('estoque')" class="invalid-feedback">
+              {{ gerError('estoque') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Descrição do Produto:" label-for="descricao_produto" class="col-md-12">
             <b-form-input
               id="descricao_produto"
-              v-model="form.descricao_produto"
+              v-model="form.descricao"
+              :class="hasError('descricao') ? 'is-invalid' : ''"
               type="text"
               placeholder="Qual a descrição do produto"
-              required
             />
+            <span v-if="hasError('descricao')" class="invalid-feedback">
+              {{ gerError('descricao') }}
+            </span>
           </b-form-group>
 
           <b-col md="12" class="mt-1">
@@ -100,27 +123,32 @@
                   <b-form-input
                     id="valor_custo"
                     v-model="form.valor_custo"
+                    :class="hasError('valor_custo') ? 'is-invalid' : ''"
                     type="text"
                     placeholder="Digite o valor de custo"
-                    required
                   />
+                  <span v-if="hasError('valor_custo')" class="invalid-feedback">
+                    {{ gerError('valor_custo') }}
+                  </span>
                 </b-form-group>
-                <b-form-group label="Lucro %:" label-for="lucro_percentual" class="col-md-4">
+                <b-form-group label="Percentual Lucro %:" label-for="lucro_percentual" class="col-md-4">
                   <b-form-input
                     id="lucro_percentual"
                     v-model="form.lucro_percentual"
+                    :class="hasError('lucro_percentual') ? 'is-invalid' : ''"
                     type="text"
                     placeholder="Digite o percentual de lucro"
-                    required
                   />
+                  <span v-if="hasError('lucro_percentual')" class="invalid-feedback">
+                    {{ gerError('lucro_percentual') }}
+                  </span>
                 </b-form-group>
                 <b-form-group label="Valor da Venda:" label-for="valor_venda" class="col-md-4">
                   <b-form-input
                     id="valor_venda"
-                    v-model="form.valor_venda"
+                    v-model="valorVenda"
                     type="text"
                     disabled
-                    required
                   />
                 </b-form-group>
               </b-row>
@@ -140,30 +168,48 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'CreateProduto',
   layout: 'default',
   data () {
     return {
       form: {
-        codigo_barra: '',
-        produto: '',
-        centro_custo: null,
-        unidade: null,
-        cor_produto: '',
+        codigo: '',
+        nome: '',
+        centro_custo_uuid: '',
+        unidade_medida: null,
+        cor: '',
         estoque: '',
-        descricao_produto: '',
+        descricao: '',
         valor_custo: '',
-        lucro_percentual: '',
-        valor_venda: ''
+        lucro_percentual: ''
       },
-      centro_custos: [{ text: 'Selecione um centro de Custo', value: null }, 'Peças', 'Serviços', 'Outros'],
       unidades: [{ text: 'Selecione uma unidade', value: null }, 'UN', 'KG', 'LT', 'M2', 'M3']
     }
   },
+  computed: {
+    ...mapGetters({
+      centroCustos: 'centro-custo/centroCustos',
+      mensagemErrors: 'produto/mensagemErrors'
+    }),
+    valorVenda () {
+      const valorCusto = this.form.valor_custo.replace(/[^0-9]/g, '.')
+      const lucroPercentual = this.form.lucro_percentual.replace(/[^0-9]/g, '.')
+      const valorVenda = parseFloat(valorCusto) + parseFloat((lucroPercentual / 100) * valorCusto)
+      return valorVenda || ''
+    }
+  },
+  mounted () {
+    this.$store.dispatch('centro-custo/getCentroCustos')
+  },
   methods: {
-    onSubmit (event) {
-      alert(this.form)
+    ...mapActions('produto', ['saveProduto']),
+    hasError (fieldName) {
+      return (fieldName in this.mensagemErrors)
+    },
+    gerError (fieldName) {
+      if (this.mensagemErrors[fieldName]) { return this.mensagemErrors[fieldName][0] }
     }
   }
 }

@@ -38,6 +38,16 @@
       </b-row>
     </div>
 
+    <b-toast
+      title="Sucesso"
+      solid
+      variant="success"
+      :visible="hasSucesso"
+      :auto-hide-delay="6000"
+    >
+      {{ mensagemSucesso }}
+    </b-toast>
+
     <b-row class="row mt-4">
       <b-col md="12">
         <div class="table-responsive table-custom">
@@ -90,8 +100,12 @@ export default {
   computed: {
     ...mapGetters({
       produtos: 'produto/produtos',
-      pagination: 'produto/pagination'
-    })
+      pagination: 'produto/pagination',
+      mensagemSucesso: 'produto/mensagemSucesso'
+    }),
+    hasSucesso () {
+      return Object.keys(this.mensagemSucesso).length > 0
+    }
   },
   mounted () {
     this.getProdutos(this.$route.query)
