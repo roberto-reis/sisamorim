@@ -63,7 +63,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="produto in produtos.data" :key="produto.uuid">
+              <tr v-for="produto in produtos" :key="produto.uuid">
                 <td>{{ produto.codigo }}</td>
                 <td>{{ produto.nome }}</td>
                 <!-- TODO: Criar um helper para tratar casas decimais -->
@@ -72,7 +72,7 @@
                 <td>{{ produto.unidade_medida }}</td>
                 <td>
                   <nuxt-link :to="'/produto/edit/' + produto.uuid" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link :to="'/produto/' + produto.uuid" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <b-button size="sm" variant="danger" @click="deleteProduto(produto)"><fa icon="trash-can" /></b-button>
                 </td>
               </tr>
             </tbody>
@@ -115,6 +115,11 @@ export default {
     ...mapActions('produto', ['getProdutos']),
     loadPagination (parametros) {
       this.getProdutos(parametros)
+    },
+    deleteProduto (produto) {
+      if (confirm('Deseja excluir o produto: ' + produto.nome)) {
+        this.$store.dispatch('produto/deleteProduto', produto.uuid)
+      }
     }
   }
 }

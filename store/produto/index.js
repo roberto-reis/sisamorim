@@ -3,8 +3,7 @@ export const state = () => ({
   pagination: {},
   produto: {},
   mensagemSucesso: '',
-  mensagemErrors: {},
-  mensagemFalha: {}
+  mensagemErrors: {}
 })
 
 // getters
@@ -13,15 +12,14 @@ export const getters = {
   produto: state => state.produto,
   pagination: state => state.pagination,
   mensagemSucesso: state => state.mensagemSucesso,
-  mensagemErrors: state => state.mensagemErrors,
-  mensagemFalha: state => state.mensagemFalha
+  mensagemErrors: state => state.mensagemErrors
 }
 
 // actions
 export const actions = {
   async getProdutos ({ commit }, params = {}) {
     const produtos = await this.$axios.$get('/produtos', { params })
-    commit('SET_PRODUTOS', produtos.data)
+    commit('SET_PRODUTOS', produtos.data.data)
     commit('SET_PAGINATION', {
       total: produtos.data.total,
       perPage: produtos.data.per_page,
@@ -36,12 +34,11 @@ export const actions = {
         commit('SET_PRODUTO', response.data)
       })
       .catch((error) => {
-        console.log('ERRO: ', error.response)
         if (error.response.status === 404) {
           this.$router.push('/produto')
         } else {
           // TODO: Tratar a falhar
-          commit('SET_FAILURE', error.response.data)
+          console.error(error)
         }
       })
   },
@@ -57,7 +54,7 @@ export const actions = {
           commit('SET_ERRORS', error.response.data.errors)
         } else {
           // TODO: Tratar a falhar
-          commit('SET_FAILURE', error.response.data.message)
+          console.error(error)
         }
       })
   },
@@ -73,7 +70,23 @@ export const actions = {
           commit('SET_ERRORS', error.response.data.errors)
         } else {
           // TODO: Tratar a falhar
-          commit('SET_FAILURE', error.response.data.message)
+          console.error(error)
+        }
+      })
+  },
+
+  async deleteProduto ({ commit }, uuid = '') {
+    await this.$axios.$delete(`/produtos/${uuid}/delete`)
+      .then((response) => {
+        commit('DELETE_PRODUTO', uuid)
+      })
+      .catch((error) => {
+        console.log(error)
+        if (error.response.status === 404) {
+          this.$router.push('/produto')
+        } else {
+          // TODO: Tratar a falhar
+          console.error(error)
         }
       })
   }
@@ -90,6 +103,10 @@ export const mutations = {
   SET_PRODUTO (state, payload) {
     state.produto = payload
   },
+  DELETE_PRODUTO (state, produtoId) {
+    const produtos = state.produtos.filter(produto => produto.uuid !== produtoId)
+    state.produtos = produtos
+  },
   SET_PRODUTO_PRECO_CUSTO (state, payload) {
     state.produto.preco_custo = payload
   },
@@ -104,8 +121,5 @@ export const mutations = {
   },
   SET_ERRORS (state, payload) {
     state.mensagemErrors = payload
-  },
-  SET_FAILURE (state, payload) {
-    state.mensagemFalha = payload
   }
 }
