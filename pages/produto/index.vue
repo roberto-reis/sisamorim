@@ -66,12 +66,13 @@
               <tr v-for="produto in produtos.data" :key="produto.uuid">
                 <td>{{ produto.codigo }}</td>
                 <td>{{ produto.nome }}</td>
-                <td>{{ produto.preco_custo }}</td>
+                <!-- TODO: Criar um helper para tratar casas decimais -->
+                <td>{{ produto.preco_venda }}</td>
                 <td>{{ produto.estoque }}</td>
                 <td>{{ produto.unidade_medida }}</td>
                 <td>
-                  <nuxt-link to="/produto/edit" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
-                  <nuxt-link to="/produto/1" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
+                  <nuxt-link :to="'/produto/edit/' + produto.uuid" class="btn btn-warning btn-sm"><fa icon="pen" /></nuxt-link>
+                  <nuxt-link :to="'/produto/' + produto.uuid" class="btn btn-danger btn-sm"><fa icon="trash-can" /></nuxt-link>
                 </td>
               </tr>
             </tbody>

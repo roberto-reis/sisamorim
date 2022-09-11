@@ -194,6 +194,7 @@ export default {
       mensagemErrors: 'produto/mensagemErrors'
     }),
     valorVenda () {
+      // TODO: Criar uma helper para tratar
       const valorCusto = this.form.valor_custo.replace(/[^0-9]/g, '.')
       const lucroPercentual = this.form.lucro_percentual.replace(/[^0-9]/g, '.')
       const valorVenda = parseFloat(valorCusto) + parseFloat((lucroPercentual / 100) * valorCusto)

@@ -10,6 +10,7 @@ export const state = () => ({
 // getters
 export const getters = {
   produtos: state => state.produtos,
+  produto: state => state.produto,
   pagination: state => state.pagination,
   mensagemSucesso: state => state.mensagemSucesso,
   mensagemErrors: state => state.mensagemErrors,
@@ -29,9 +30,20 @@ export const actions = {
     })
   },
 
-  async getProduto ({ commit }, uuid) {
-    const produto = await this.$axios.$get(`/produtos/${uuid}`)
-    commit('SET_PRODUTO', produto)
+  async getProduto ({ commit }, uuid = '') {
+    await this.$axios.$get(`/produtos/${uuid}/edit`)
+      .then((response) => {
+        commit('SET_PRODUTO', response.data)
+      })
+      .catch((error) => {
+        console.log('ERRO: ', error.response)
+        if (error.response.status === 404) {
+          this.$router.push('/produto')
+        } else {
+          // TODO: Tratar a falhar
+          commit('SET_FAILURE', error.response.data)
+        }
+      })
   },
 
   async saveProduto ({ commit }, payload) {
@@ -41,7 +53,22 @@ export const actions = {
         this.$router.push('/produto')
       })
       .catch((error) => {
-        console.log(error)
+        if (error.response.status === 422) {
+          commit('SET_ERRORS', error.response.data.errors)
+        } else {
+          // TODO: Tratar a falhar
+          commit('SET_FAILURE', error.response.data.message)
+        }
+      })
+  },
+
+  async updateProduto ({ commit }, payload) {
+    await this.$axios.$put(`/produtos/${payload.uuid}/update`, payload)
+      .then((response) => {
+        commit('SET_SUCESSO', response.message)
+        this.$router.push('/produto')
+      })
+      .catch((error) => {
         if (error.response.status === 422) {
           commit('SET_ERRORS', error.response.data.errors)
         } else {
@@ -62,6 +89,15 @@ export const mutations = {
   },
   SET_PRODUTO (state, payload) {
     state.produto = payload
+  },
+  SET_PRODUTO_PRECO_CUSTO (state, payload) {
+    state.produto.preco_custo = payload
+  },
+  SET_PRODUTO_PERCENTUAL_LUCRO (state, payload) {
+    state.produto.pecentual_lucro = payload
+  },
+  SET_PRODUTO_PRECO_VENDA (state, payload) {
+    state.produto.preco_venda = payload
   },
   SET_SUCESSO (state, payload) {
     state.mensagemSucesso = payload
