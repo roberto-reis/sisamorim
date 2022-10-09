@@ -67,6 +67,7 @@ export const actions = {
       })
       .catch((error) => {
         if (error.response.status === 422) {
+          console.error('SET_ERRORS', error.response.data.errors.codigo)
           commit('SET_ERRORS', error.response.data.errors)
         } else {
           // TODO: Tratar a falhar

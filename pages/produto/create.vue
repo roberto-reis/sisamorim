@@ -35,7 +35,7 @@
               required
             />
             <span v-if="hasError('codigo')" class="invalid-feedback">
-              {{ gerError('codigo') }}
+              {{ getError('codigo') }}
             </span>
           </b-form-group>
 
@@ -49,11 +49,11 @@
               required
             />
             <span v-if="hasError('codigo')" class="invalid-feedback">
-              {{ gerError('nome') }}
+              {{ getError('nome') }}
             </span>
           </b-form-group>
 
-          <b-form-group label="Centro de Custo:" label-for="centro_custo" class="col-md-6">
+          <b-form-group label="Centro de Custo*:" label-for="centro_custo" class="col-md-6">
             <select id="centro_custo" v-model="form.centro_custo_uuid" class="form-control custom-select" :class="hasError('centro_custo_uuid') ? 'is-invalid' : ''" required>
               <option value="">Selecione um centro de Custo</option>
               <option v-for="centroCusto in centroCustos" :key="centroCusto.uuid" :value="centroCusto.uuid">
@@ -61,11 +61,11 @@
               </option>
             </select>
             <span v-if="hasError('centro_custo_uuid')" class="invalid-feedback">
-              {{ gerError('centro_custo_uuid') }}
+              {{ getError('centro_custo_uuid') }}
             </span>
           </b-form-group>
 
-          <b-form-group label="Unidade:" label-for="unidade" class="col-md-6">
+          <b-form-group label="Unidade:*" label-for="unidade" class="col-md-6">
             <b-form-select
               id="unidade"
               v-model="form.unidade_medida"
@@ -73,7 +73,7 @@
               :options="unidades"
             />
             <span v-if="hasError('unidade_medida')" class="invalid-feedback">
-              {{ gerError('unidade_medida') }}
+              {{ getError('unidade_medida') }}
             </span>
           </b-form-group>
 
@@ -86,7 +86,7 @@
               placeholder="Qual a cor do produto"
             />
             <span v-if="hasError('cor')" class="invalid-feedback">
-              {{ gerError('cor') }}
+              {{ getError('cor') }}
             </span>
           </b-form-group>
 
@@ -99,11 +99,11 @@
               placeholder="Qunatidade em estoque"
             />
             <span v-if="hasError('estoque')" class="invalid-feedback">
-              {{ gerError('estoque') }}
+              {{ getError('estoque') }}
             </span>
           </b-form-group>
 
-          <b-form-group label="Descrição do Produto:" label-for="descricao_produto" class="col-md-12">
+          <b-form-group label="Descrição do Produto*:" label-for="descricao_produto" class="col-md-12">
             <b-form-input
               id="descricao_produto"
               v-model="form.descricao"
@@ -112,7 +112,7 @@
               placeholder="Qual a descrição do produto"
             />
             <span v-if="hasError('descricao')" class="invalid-feedback">
-              {{ gerError('descricao') }}
+              {{ getError('descricao') }}
             </span>
           </b-form-group>
 
@@ -128,7 +128,7 @@
                     placeholder="Digite o valor de custo"
                   />
                   <span v-if="hasError('valor_custo')" class="invalid-feedback">
-                    {{ gerError('valor_custo') }}
+                    {{ getError('valor_custo') }}
                   </span>
                 </b-form-group>
                 <b-form-group label="Percentual Lucro %:" label-for="lucro_percentual" class="col-md-4">
@@ -140,7 +140,7 @@
                     placeholder="Digite o percentual de lucro"
                   />
                   <span v-if="hasError('lucro_percentual')" class="invalid-feedback">
-                    {{ gerError('lucro_percentual') }}
+                    {{ getError('lucro_percentual') }}
                   </span>
                 </b-form-group>
                 <b-form-group label="Valor da Venda:" label-for="valor_venda" class="col-md-4">
@@ -209,7 +209,7 @@ export default {
     hasError (fieldName) {
       return (fieldName in this.mensagemErrors)
     },
-    gerError (fieldName) {
+    getError (fieldName) {
       if (this.mensagemErrors[fieldName]) { return this.mensagemErrors[fieldName][0] }
     }
   }

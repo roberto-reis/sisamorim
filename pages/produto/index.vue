@@ -26,14 +26,12 @@
         </b-col>
 
         <b-col md="5" sm="12">
-          <b-form inline>
-            <b-input-group class="w-100">
-              <b-form-input />
-              <b-input-group-append>
-                <b-button variant="secondary"><fa icon="magnifying-glass" /></b-button>
-              </b-input-group-append>
-            </b-input-group>
-          </b-form>
+          <b-input-group class="w-100">
+            <b-form-input v-model="search" contenteditable="true" placeholder="Pesquisar..." />
+            <b-input-group-append>
+              <b-button variant="secondary" tag="button"><fa icon="magnifying-glass" /></b-button>
+            </b-input-group-append>
+          </b-input-group>
         </b-col>
       </b-row>
     </div>
@@ -43,7 +41,7 @@
       solid
       variant="success"
       :visible="hasSucesso"
-      :auto-hide-delay="6000"
+      :auto-hide-delay="5000"
     >
       {{ mensagemSucesso }}
     </b-toast>
@@ -96,6 +94,7 @@ export default {
   layout: 'default',
   data () {
     return {
+      search: ''
     }
   },
   computed: {
@@ -106,6 +105,11 @@ export default {
     }),
     hasSucesso () {
       return Object.keys(this.mensagemSucesso).length > 0
+    }
+  },
+  watch: {
+    search () {
+      this.getProdutos({ search: this.search })
     }
   },
   mounted () {

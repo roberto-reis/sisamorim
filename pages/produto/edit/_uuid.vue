@@ -28,68 +28,93 @@
             <b-form-input
               id="codigo_barra"
               v-model="produto.codigo"
+              :class="hasError('codigo') ? 'is-invalid' : ''"
               type="text"
               placeholder="Digite o Código de Barra"
               required
             />
+            <span v-if="hasError('codigo')" class="invalid-feedback">
+              {{ getError('codigo') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Nome do Produto*:" label-for="produto" class="col-md-6">
             <b-form-input
               id="produto"
               v-model="produto.nome"
+              :class="hasError('nome') ? 'is-invalid' : ''"
               type="text"
               placeholder="Digite o Nome do Produto"
               required
             />
+            <span v-if="hasError('nome')" class="invalid-feedback">
+              {{ getError('nome') }}
+            </span>
           </b-form-group>
 
-          <b-form-group label="Centro de Custo:" label-for="centro_custo" class="col-md-6">
-            <select id="centro_custo" v-model="produto.centro_custo_uuid" class="form-control custom-select" required>
+          <b-form-group label="Centro de Custo*:" label-for="centro_custo" class="col-md-6">
+            <select id="centro_custo" v-model="produto.centro_custo_uuid" :class="hasError('centro_custo_uuid') ? 'is-invalid' : ''" class="form-control custom-select" required>
               <option value="">Selecione um centro de Custo</option>
               <option v-for="centroCusto in centroCustos" :key="centroCusto.uuid" :value="centroCusto.uuid">
                 {{ centroCusto.nome }}
               </option>
             </select>
+            <span v-if="hasError('centro_custo_uuid')" class="invalid-feedback">
+              {{ getError('centro_custo_uuid') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Unidade:" label-for="unidade" class="col-md-6">
             <b-form-select
               id="unidade"
               v-model="produto.unidade_medida"
+              :class="hasError('unidade_medida') ? 'is-invalid' : ''"
               :options="unidades"
               required
             />
+            <span v-if="hasError('unidade_medida')" class="invalid-feedback">
+              {{ getError('unidade_medida') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Cor do Produto:" label-for="cor_produto" class="col-md-6">
             <b-form-input
               id="cor_produto"
               v-model="produto.cor"
+              :class="hasError('cor') ? 'is-invalid' : ''"
               type="text"
               placeholder="Qual a cor do produto"
-              required
             />
+            <span v-if="hasError('cor')" class="invalid-feedback">
+              {{ getError('cor') }}
+            </span>
           </b-form-group>
 
           <b-form-group label="Estoque:" label-for="estoque" class="col-md-6">
             <b-form-input
               id="estoque"
               v-model="produto.estoque"
+              :class="hasError('estoque') ? 'is-invalid' : ''"
               type="text"
               placeholder="Qunatidade em estoque"
-              required
             />
+            <span v-if="hasError('estoque')" class="invalid-feedback">
+              {{ getError('estoque') }}
+            </span>
           </b-form-group>
 
-          <b-form-group label="Descrição do Produto:" label-for="descricao_produto" class="col-md-12">
+          <b-form-group label="Descrição do Produto*:" label-for="descricao_produto" class="col-md-12">
             <b-form-input
               id="descricao_produto"
               v-model="produto.descricao"
+              :class="hasError('descricao') ? 'is-invalid' : ''"
               type="text"
               placeholder="Qual a descrição do produto"
               required
             />
+            <span v-if="hasError('descricao')" class="invalid-feedback">
+              {{ getError('descricao') }}
+            </span>
           </b-form-group>
 
           <b-col md="12" class="mt-1">
@@ -99,19 +124,25 @@
                   <b-form-input
                     id="valor_custo"
                     v-model="precoCusto"
+                    :class="hasError('preco_custo') ? 'is-invalid' : ''"
                     type="text"
                     placeholder="Digite o valor de custo"
-                    required
                   />
+                  <span v-if="hasError('preco_custo')" class="invalid-feedback">
+                    {{ getError('preco_custo') }}
+                  </span>
                 </b-form-group>
-                <b-form-group label="Lucro %:" label-for="lucro" class="col-md-4">
+                <b-form-group label="Percentual Lucro %:" label-for="lucro" class="col-md-4">
                   <b-form-input
                     id="lucro"
                     v-model="pecentualLucro"
+                    :class="hasError('pecentual_lucro') ? 'is-invalid' : ''"
                     type="text"
                     placeholder="Digite o percentual de lucro"
-                    required
                   />
+                  <span v-if="hasError('pecentual_lucro')" class="invalid-feedback">
+                    {{ getError('pecentual_lucro') }}
+                  </span>
                 </b-form-group>
                 <b-form-group label="Valor da Venda:" label-for="valor_venda" class="col-md-4">
                   <b-form-input
@@ -119,7 +150,6 @@
                     v-model="produto.preco_venda"
                     type="text"
                     disabled
-                    required
                   />
                 </b-form-group>
               </b-row>
@@ -145,7 +175,7 @@ export default {
   layout: 'default',
   data () {
     return {
-      unidades: [{ text: 'Selecione uma unidade', value: null }, 'UN', 'KG', 'LT', 'M2', 'M3']
+      unidades: [{ text: 'Selecione uma unidade', value: null }, 'UN', 'KG', 'LT', 'M2', 'M3', 'PC']
     }
   },
   computed: {
@@ -177,7 +207,8 @@ export default {
       }
     },
     ...mapGetters({
-      centroCustos: 'centro-custo/centroCustos'
+      centroCustos: 'centro-custo/centroCustos',
+      mensagemErrors: 'produto/mensagemErrors'
     })
   },
   mounted () {
@@ -185,7 +216,13 @@ export default {
     this.$store.dispatch('centro-custo/getCentroCustos')
   },
   methods: {
-    ...mapActions('produto', ['getProduto', 'updateProduto'])
+    ...mapActions('produto', ['getProduto', 'updateProduto']),
+    hasError (fieldName) {
+      return (fieldName in this.mensagemErrors)
+    },
+    getError (fieldName) {
+      if (this.mensagemErrors[fieldName]) { return this.mensagemErrors[fieldName][0] }
+    }
   }
 }
 </script>
